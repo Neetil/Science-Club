@@ -12,12 +12,15 @@
   --neon-blue: 0 160 255;
   --glass: 255 255 255 / 8%;
   --glass-border: 255 255 255 / 12%;
+  --font-sans: var(--font-inter, ui-sans-serif), system-ui, -apple-system, Segoe UI, Roboto, Inter, "Poppins", Arial, "Apple Color Emoji", "Segoe UI Emoji";
+  --font-display: var(--font-poppins, "Poppins"), var(--font-sans);
 }
 
 html,
 body {
   height: 100%;
-  background: radial-gradient(1200px 800px at 10% -10%, rgba(208,80,255,0.15), transparent 60%),
+  background:
+    radial-gradient(1200px 800px at 10% -10%, rgba(208,80,255,0.15), transparent 60%),
     radial-gradient(1000px 700px at 90% 10%, rgba(0,255,214,0.12), transparent 60%),
     radial-gradient(900px 600px at 50% 110%, rgba(0,160,255,0.12), transparent 60%),
     rgb(var(--bg));
@@ -25,13 +28,8 @@ body {
 }
 
 /***** Typography *****/
-:root {
-  --font-sans: var(--font-inter, ui-sans-serif), system-ui, -apple-system, Segoe UI, Roboto, Inter, "Poppins", Arial, "Apple Color Emoji", "Segoe UI Emoji";
-  --font-display: var(--font-poppins, "Poppins"), var(--font-sans);
-}
-
 @layer base {
-  * { @apply border-border; }
+  * { @apply border-white/10; }
   body { @apply bg-transparent text-white; }
   h1,h2,h3,h4 { @apply tracking-tight; font-family: var(--font-display); }
 }
@@ -45,14 +43,16 @@ body {
     );
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid color-mix(in oklab, white 14%, transparent);
+  border: 1px solid rgba(255,255,255,0.12);
   box-shadow: 0 10px 40px -10px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.06);
 }
 
 /***** Neon gradients *****/
 .neon-text {
   background: linear-gradient(90deg, rgb(var(--neon-purple)) 0%, rgb(var(--neon-teal)) 50%, rgb(var(--neon-blue)) 100%);
-  -webkit-background-clip: text; background-clip: text; color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
 }
 
 .btn-neon {
@@ -61,9 +61,13 @@ body {
 }
 .btn-neon::before {
   content: "";
-  position: absolute; inset: 0; border-radius: 0.75rem;
+  position: absolute;
+  inset: 0;
+  border-radius: 0.75rem;
   background: linear-gradient(120deg, rgba(208,80,255,0.5), rgba(0,255,214,0.5), rgba(0,160,255,0.5));
-  filter: blur(12px); opacity: 0.0; transition: opacity .3s ease;
+  filter: blur(12px);
+  opacity: 0;
+  transition: opacity .3s ease;
 }
 .btn-neon:hover::before { opacity: 0.8; }
 .btn-neon span {
@@ -74,10 +78,16 @@ body {
 .float-slow { animation: float 8s ease-in-out infinite; }
 .float-med { animation: float 6s ease-in-out infinite; }
 .float-fast { animation: float 4s ease-in-out infinite; }
-@keyframes float { 0%,100%{ transform: translateY(0)} 50%{ transform: translateY(-10px)} }
+@keyframes float {
+  0%,100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
 
 .fade-in { animation: fadeIn .8s ease both; }
-@keyframes fadeIn { from{ opacity:0; transform: translateY(6px)} to{ opacity:1; transform: none} }
+@keyframes fadeIn {
+  from { opacity:0; transform: translateY(6px);}
+  to { opacity:1; transform: none;}
+}
 
 /***** Section layout *****/
 .section { @apply py-24 md:py-28; }
