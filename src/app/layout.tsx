@@ -16,12 +16,14 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode; }>) {
   return (
-    <html lang="en" className={`${inter.variable} ${poppins.variable}`}>
+    <html lang="en" className={`${inter.variable} ${poppins.variable} h-full`}>
       <head>
         <Script crossOrigin="anonymous" src="//unpkg.com/same-runtime/dist/index.global.js" />
       </head>
-      <body suppressHydrationWarning className="antialiased min-h-screen">
+      <body suppressHydrationWarning className="antialiased min-h-screen h-full m-0">
+        <main className="min-h-screen h-full">
         <ClientBody>{children}</ClientBody>
+          </main>
       </body>
     </html>
   );
